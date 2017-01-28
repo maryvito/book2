@@ -1,4 +1,4 @@
-class Vertex:
+class MyVertex:
     def __init__(self, key):
         self.id = key
         self.connectedTo = {}
@@ -19,23 +19,23 @@ class Vertex:
         return self.connectedTo[nbr]
 
 
-class Graph:
+class MyGraph:
     def __init__(self):
         self.vertList = {}
         self.numVertices = 0
 
     def addVertex(self, key):
         self.numVertices += 1
-        newVertex = Vertex(key)
+        newVertex = MyVertex(key)
         self.vertList[key] = newVertex
         return newVertex
 
     def __contains__(self, item):
         return item in self.vertList
 
-    def addEgge(self, t,f, cost = 0):
+    def addEdge(self, t,f, cost = 0):
         if t not in self.vertList:
-            nv = self.addVertex
+            nv = self.addVertex(t)
         if f not in self.vertList:
             nv = self.addVertex(f)
         self.vertList[t].addNeighbor(self.vertList[f], cost)
@@ -49,15 +49,18 @@ class Graph:
 
 
 
-g = Graph()
-g.addVertex("grandfather1")
-g.addVertex("grandmather1")
-g.addEgge("grandfather1", "grandmather1", 0)
-g.addEgge("grandfasther2", "grandmather2", 0)
-g.addEgge("grandfather1", "father1", 0)
-g.addEgge("grandfather2", "father2", 0)
+
+g = MyGraph()
+g.addEdge(0,1,5)
+g.addEdge(0,5,2)
+g.addEdge(1,2,4)
+g.addEdge(2,3,9)
+g.addEdge(3,5,3)
+g.addEdge(4,0,1)
+g.addEdge(5,4,8)
+g.addEdge(5,2,1)
 
 for v in g:
-    for n in v:
-        print("(%d , % d)") & (v.id, n.id)
+    for n in v.getConnections():
+        print("(%s , % s)" % (str(v.getId()), str(n.getId())))
 
