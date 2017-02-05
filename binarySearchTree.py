@@ -6,6 +6,58 @@ class BinarySearchTree:
     def __len__(self):
         return self.size
 
+    def print(self):
+        if self.root:
+            self._print(self.root)
+        else:
+            print("Дерево пусто")
+
+
+    def _print(self, current):
+        n = 0
+        print("_"+str(current.payload))
+        if(current.hasLeftChild):
+            n+=2
+            print(" "*n+"|")
+            self._print(current.leftChild)
+        else:
+            n+=2
+            print("|_")
+
+        if(current.hasRightChild):
+            n-=2
+            print(" "*n+"|")
+            self._print(current.rightChild)
+        else:
+            n-=2
+            print("|_")
+
+
+    def put(self, key, payload):
+        if self.root:
+            self._put(self.root, key, payload)
+        else:
+            self.root = TreeNode(key, payload)
+        self.size += 1
+
+    def _put(self, currentNode, key, payload):
+        if currentNode.key == key:
+            currentNode.payload = payload
+
+        elif key < currentNode.key:
+            if currentNode.hasLeftChild():
+                self._put(currentNode.leftChild, key, payload)
+            else:
+                currentNode.leftChild = TreeNode(key, payload, parent= currentNode)
+
+        elif key > currentNode.key:
+            if currentNode.hasRightChild():
+                self._put(currentNode.rightChild, key, payload)
+            else:
+                currentNode.leftChild = TreeNode(key, payload, parent= currentNode)
+
+
+
 class TreeNode:
     def __init__(self, key, payload, left= None, right= None, parent= None):
         self.key = key
@@ -45,7 +97,27 @@ class TreeNode:
         if self.rightChild:
             self.rightChild.parent = self
 
-    def put(self):
-        
+
+
+
+
+t = BinarySearchTree()
+t.put(100, "R")
+t.put(110, "right")
+t.put(80, "left")
+t.put(130, "N4")
+t.put(120, "N3")
+t.put(90, "N2")
+t.put(70, "N1")
+t.print()
+
+
+
+
+
+
+
+
+
 
 
