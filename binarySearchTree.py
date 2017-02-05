@@ -7,27 +7,28 @@ class BinarySearchTree:
         return self.size
 
     def print(self):
+
         if self.root:
-            self._print(self.root)
+            self._print(self.root,0)
         else:
             print("Дерево пусто")
 
 
-    def _print(self, current):
-        n = 0
+    def _print(self, current, n):
+
         print("_"+str(current.payload))
-        if(current.hasLeftChild):
+        if current.hasLeftChild():
             n+=2
             print(" "*n+"|")
-            self._print(current.leftChild)
+            self._print(current.leftChild, n)
         else:
             n+=2
             print("|_")
 
-        if(current.hasRightChild):
+        if current.hasRightChild():
             n-=2
             print(" "*n+"|")
-            self._print(current.rightChild)
+            self._print(current.rightChild, n)
         else:
             n-=2
             print("|_")
@@ -54,7 +55,7 @@ class BinarySearchTree:
             if currentNode.hasRightChild():
                 self._put(currentNode.rightChild, key, payload)
             else:
-                currentNode.leftChild = TreeNode(key, payload, parent= currentNode)
+                currentNode.rightChild = TreeNode(key, payload, parent= currentNode)
 
 
 
