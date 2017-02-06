@@ -16,23 +16,17 @@ class BinarySearchTree:
 
     def _print(self, current, n):
 
-        print("_"+str(current.payload))
+        print(" "*n+"|_"+str(current.payload))
         if current.hasLeftChild():
-            n+=2
-            print(" "*n+"|")
+            n += 2
             self._print(current.leftChild, n)
         else:
-            n+=2
-            print("|_")
-
+            n += 2
+        print(" "*n+"|_")
         if current.hasRightChild():
-            n-=2
-            print(" "*n+"|")
             self._print(current.rightChild, n)
         else:
-            n-=2
-            print("|_")
-
+             print(" "*n+"|_")
 
     def put(self, key, payload):
         if self.root:
@@ -56,8 +50,6 @@ class BinarySearchTree:
                 self._put(currentNode.rightChild, key, payload)
             else:
                 currentNode.rightChild = TreeNode(key, payload, parent= currentNode)
-
-
 
 class TreeNode:
     def __init__(self, key, payload, left= None, right= None, parent= None):
